@@ -18,28 +18,43 @@ export default class Letter extends Component {
       }
       this.panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
-        onPanResponderMove: Animated.event([null,{
+        onPanResponderMove: Animated.event([null, {
           dx: this.state.pan.x,
           dy: this.state.pan.y
         }]),
         onPanResponderRelease: (e, gesture) => {
           this.state.pan.flattenOffset()
           if (this.props.isDropZone(gesture)){ //exchange drop zone
-            this.props.exchangeForThree(this.props.counter, this.props.letter)
-            this.setState({showTile: false})
+            this.props.exchangeForThree(this.props.letter)
+            this.setState({ showTile: false })
           } else if (this.props.isBoardArea(gesture)) {
-            let placesLetterTouches = this.props.placeLetterOnBoard(gesture)
+            const placesLetterTouches = this.props.placeLetterOnBoard(gesture);
 
-            if (placesLetterTouches !== []) {
-              let selectedSpace = placesLetterTouches[0]
-              let newCoordinates =  { x: selectedSpace[0], y: selectedSpace[1] }
-            } else {
-              Animated.spring(
-                this.state.pan,
-                {toValue: {x: 0, y: 0}}
-              ).start();
-            }
-            console.log('here are the new coordinates: ', newCoordinates)
+            // debugger;
+
+            console.log('placesLetterTouches', placesLetterTouches);
+
+            // debugger;
+
+            Animated.timing(
+              this.state.pan,
+              { toValue: { x: placesLetterTouches.x, y: placesLetterTouches.y } }
+            ).start();
+
+            return;
+
+
+            //
+            // if (placesLetterTouches !== []) {
+            //   let selectedSpace = placesLetterTouches[0]
+            //   let newCoordinates =  { x: selectedSpace[0], y: selectedSpace[1] }
+            // } else {
+            //   Animated.spring(
+            //     this.state.pan,
+            //     { toValue: { x: 0, y: 0 } }
+            //   ).start();
+            // }
+
             // is the value in the pan an offset not the absolute?
             // Animated.spring(
             //   this.state.pan,
@@ -54,13 +69,13 @@ export default class Letter extends Component {
           } else {
             Animated.spring(
               this.state.pan,
-              {toValue: {x: 0, y: 0}}
+              { toValue: { x: 0, y: 0 } }
             ).start();
           }
         },
         onPanResponderGrant: (e, gestureState) => {
-          this.state.pan.setOffset({x: this.state.pan.x._value, y: this.state.pan.y._value})
-          this.state.pan.setValue({x: 0, y: 0});
+          // this.state.pan.setOffset({ x: this.state.pan.x._value, y: this.state.pan.y._value })
+          // this.state.pan.setValue({ x: 0, y: 0 });
         }
       });
   }
@@ -68,9 +83,11 @@ export default class Letter extends Component {
   render() {
     if (this.state.showTile) {
       return(
-        <View key={this.props.counter}>
-          <Animated.View {...this.panResponder.panHandlers} style={[this.state.pan.getLayout(), styles.letterPieces]}>
-            <Text> {this.props.letter} </Text>
+        <View key={ this.props.counter }>
+          <Animated.View { ...this.panResponder.panHandlers }
+            style={ [this.state.pan.getLayout(), styles.letterPieces] }
+          >
+            <Text>{ this.props.letter }</Text>
           </Animated.View>
         </View>
       )
