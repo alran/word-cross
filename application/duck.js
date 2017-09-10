@@ -99,13 +99,17 @@ export default function reducers($$state = $$initialState, action = 'initial') {
     }
 
     case ADD_BOARD_DROP_ZONE: {
-      const boardDropAreas = $$state.boardDropAreas;
+      let boardDropAreas = $$state.boardDropAreas;
+      const headerHeight = GLOBAL.DIMENSIONS.HEADER_HEIGHT
 
-      if (boardDropAreas[zone.y]) {
-        boardDropAreas[zone.y].push(zone.x);
+      const yValue = zone.y + headerHeight
+      if (boardDropAreas[yValue]) {
+        boardDropAreas[yValue].push(zone.x);
       } else {
-        boardDropAreas[zone.y] = [zone.x];
+        boardDropAreas[yValue] = [zone.x];
       }
+
+      boardDropAreas[yValue] = boardDropAreas[yValue].sort((a, b) => { return a - b })
 
       return { ...$$state, boardDropAreas, loading };
     }

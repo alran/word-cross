@@ -10,7 +10,8 @@ module.exports = {
   },
   DIMENSIONS: {
     WIDTH: Dimensions.get('window').width,
-    HEIGHT: Dimensions.get('window').height
+    HEIGHT: Dimensions.get('window').height,
+    HEADER_HEIGHT: 64
   },
   LETTERSIZE: 30,
   PIECES: {
