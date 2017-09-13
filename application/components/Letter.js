@@ -27,8 +27,6 @@ export default class Letter extends Component {
             const xAdjustment = placesLetterTouches.x - startingX - 31;
             const yAdjustment = placesLetterTouches.y - startingY - 31;
 
-            console.log('startingX:', startingX, 'startingY:', startingY);
-
             Animated.spring(
               this.state.pan,
               { toValue: { x: xAdjustment, y: yAdjustment } }

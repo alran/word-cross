@@ -44,21 +44,21 @@ class Home extends Component {
 
 let styles = StyleSheet.create({
   content: {
+    alignItems: 'center',
+    backgroundColor: GLOBAL.COLORS.LIGHTPURPLE,
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: GLOBAL.COLORS.LIGHTPURPLE
   },
   button: {
-    padding: 10,
-    justifyContent: 'center',
-    height: 50,
+    alignItems: 'center',
     backgroundColor: GLOBAL.COLORS.GREEN,
     borderRadius: 8,
+    height: 50,
+    justifyContent: 'center',
     margin: 10,
+    padding: 10,
     width: GLOBAL.DIMENSIONS.WIDTH * .9,
-    alignItems: 'center'
   },
   buttonText: {
     color: 'white',

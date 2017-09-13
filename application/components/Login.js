@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
@@ -12,12 +12,12 @@ GLOBAL = require('../Global.js');
 
 export default class Login extends Component {
   login() {
-
+    console.log('trying to login');
   }
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={ { flex: 1 } }>
         <View style={ styles.background }>
           <Image
             source={ require('../images/background.png') }
@@ -36,30 +36,30 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
   loginContainer: {
-    marginTop: 150,
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: 'transparent',
+    flex: 1,
+    justifyContent: 'center',
+    marginTop: 150
   },
   background: {
+    bottom: 0,
     position: 'absolute',
-    width: GLOBAL.DIMENSIONS.WIDTH,
     height: GLOBAL.DIMENSIONS.HEIGHT,
     left: 0,
-    top: 0,
     right: 0,
-    bottom: 0
+    top: 0,
+    width: GLOBAL.DIMENSIONS.WIDTH,
   },
   backgroundImage: {
-    flex: 1,
     alignItems: 'stretch',
+    flex: 1,
   },
   button: {
+    backgroundColor: GLOBAL.COLORS.YELLOW,
+    height: 50,
+    justifyContent: 'center',
     marginTop: 10,
     padding: 10,
-    justifyContent: 'center',
-    height: 50,
-    backgroundColor: GLOBAL.COLORS.YELLOW
   }
 })
